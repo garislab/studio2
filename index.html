@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Garis Cerita (PT Garis Cerita Karya — GCK) | 2D Sketch Parallax Architecture Studio</title>
+  <meta
+    name="description"
+    content="Studio Arsitektur, Engineering, Urban & Digital BIM Lab (PT Garis Cerita Karya / GCK) di Jakarta Selatan. Jelajahi sketsa 2D interaktif ruang studio kami dengan efek paralaks: About Studio, Portfolio, Research & Lab, Archive/History, dan Contact."
+  />
+
+  <!-- Google Fonts: Architectural Display, Hand-Sketch Callout, & Technical Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ========================================================================
+       1. LOADING SCREEN (SKETCH PAPER INITIALIZATION)
+       ======================================================================== -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-card">
+      <svg class="loading-logo-svg" viewBox="0 0 120 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M10 10 H110 L82 32 H44 V66 H88 V42 L110 24 V86 H10 Z M10 10 L44 32 M10 86 L44 66 M110 86 L88 66"
+          stroke="#1E1B18"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <div class="loading-title">GARIS CERITA</div>
+      <div class="loading-subtitle">PT GARIS CERITA KARYA (GCK) · MENYIAPKAN SKETSA STUDIO 2D...</div>
+      <div class="loading-bar-track">
+        <div class="loading-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. MINIMALIST 2D SKETCH PARALLAX WORKSPACE (NO MENU BAR, NO MAP)
+       ======================================================================== -->
+  <main id="sketch-app-shell" class="sketch-app-shell">
+    <section
+      id="sketch-parallax-viewport"
+      class="sketch-parallax-viewport"
+      aria-label="Sketsa 2D Interaktif Ruang Studio Arsitektur PT Garis Cerita Karya"
+    >
+      <!-- Mobile/Tablet subtle pan/fit helper pill (hidden on desktop) -->
+      <div class="mobile-stage-controls" aria-hidden="false">
+        <button id="btn-mobile-fit" class="sketch-mini-pill" type="button" title="Ubah tampilan Utuh / Perbesar Geser">
+          <span id="mobile-fit-label">↔ Geser Sketsa</span>
+        </button>
+        <button id="btn-sound-mobile" class="sketch-mini-pill" type="button" title="Aktifkan/Matikan Suara">
+          🔊
+        </button>
+      </div>
+
+      <!-- Aspect-Ratio Locked 16:9 (1376x768) 2D Sketch Stage with Multi-Plane Parallax -->
+      <div id="sketch-scene-frame" class="sketch-scene-frame">
+        <div id="sketch-zoom-rig" class="sketch-zoom-rig">
+
+          <!-- LAYER 1: Cleaned Raw 2D Studio Sketch Background (Parallax Depth 0.45) -->
+          <div class="parallax-plane plane-bg" data-depth="0.45">
+            <img
+              src="assets/images/studio-sketch-raw-bg.jpg"
+              alt="Sketsa 2D Ruang Studio Arsitektur PT Garis Cerita Karya"
+              class="sketch-raw-bg-img"
+              draggable="false"
+            />
+          </div>
+
+          <!-- LAYER 2: Warm Architectural Window Sunlight & Paper Wash (Parallax Depth 0.88) -->
+          <div class="parallax-plane plane-sunlight" data-depth="0.88" aria-hidden="true">
+            <div class="sunlight-rays"></div>
+          </div>
+
+          <!-- LAYER 3: Interactive Studio Object Hitboxes (Locked to Sketch Plane 0.45) -->
+          <div class="parallax-plane plane-objects" data-depth="0.45">
+            <!-- 1. ABOUT STUDIO — Framed Team Photo on Left Wall -->
+            <div
+              class="sketch-object-hitbox"
+              data-menu-target="about"
+              role="button"
+              tabindex="0"
+              aria-label="About Studio — Klik bingkai foto studio untuk melihat profil, visi misi, dan tim kami"
+              style="left: 9.5%; top: 27.0%; width: 7.5%; height: 16.6%;"
+            >
+              <div class="object-sketch-border"></div>
+            </div>
+
+            <!-- 2. PORTFOLIO — Tilted Architectural Drafting Board on Desk -->
+            <div
+              class="sketch-object-hitbox"
+              data-menu-target="portfolio"
+              role="button"
+              tabindex="0"
+              aria-label="Portfolio — Klik papan tulis proyek untuk melihat 22 portofolio desain"
+              style="left: 21.0%; top: 31.8%; width: 19.9%; height: 21.5%;"
+            >
+              <div class="object-sketch-border"></div>
+            </div>
+
+            <!-- 3. RESEARCH & LAB — Computer Monitor on Desk -->
+            <div
+              class="sketch-object-hitbox"
+              data-menu-target="lab"
+              role="button"
+              tabindex="0"
+              aria-label="Research and Lab — Klik komputer studi dan riset untuk membuka Feasibility Study Dashboard dan GitHub"
+              style="left: 47.0%; top: 38.2%; width: 13.7%; height: 15.2%;"
+            >
+              <div class="monitor-live-glow"></div>
+              <div class="object-sketch-border"></div>
+            </div>
+
+            <!-- 4. ARCHIVE / HISTORY — Wooden Bookshelf & Document Rack -->
+            <div
+              class="sketch-object-hitbox"
+              data-menu-target="archive"
+              role="button"
+              tabindex="0"
+              aria-label="Archive and History — Klik rak dokumen untuk melihat sejarah studio, penghargaan, dan arsip"
+              style="left: 67.2%; top: 15.8%; width: 15.5%; height: 49.5%;"
+            >
+              <div class="object-sketch-border"></div>
+            </div>
+
+            <!-- 5. CONTACT — Vintage Desk Telephone on Left Desk Corner -->
+            <div
+              id="sketch-phone-object"
+              class="sketch-object-hitbox"
+              data-menu-target="contact"
+              role="button"
+              tabindex="0"
+              aria-label="Contact — Klik telepon meja untuk mendengar dering telepon dan melihat informasi kontak"
+              style="left: 11.6%; top: 49.8%; width: 6.3%; height: 8.8%;"
+            >
+              <div class="object-sketch-border"></div>
+              <div class="phone-ring-waves" aria-hidden="true">
+                <span></span><span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- LAYER 4: Foreground Parallax Depth (Drafting Crosshairs & Sunlight Dust Particles, Depth 1.35) -->
+          <div class="parallax-plane plane-foreground" data-depth="1.35" aria-hidden="true">
+            <canvas id="sketch-particles-canvas" class="sketch-particles-canvas"></canvas>
+          </div>
+
+          <!-- LAYER 5: In-Sketch Minimalist Brand Stamp & 5 Menu Link Buttons (Tracing-Paper Parallax Depth 0.72) -->
+          <div class="parallax-plane plane-ui-links" data-depth="0.72">
+
+            <!-- Minimalist Hand-Sketched Studio Title in Top-Left of Sketch (Matches Concept Image) -->
+            <div class="in-sketch-brand">
+              <button
+                id="btn-brand-reset"
+                type="button"
+                class="in-sketch-brand-btn"
+                title="PT Garis Cerita Karya — Studio Arsitektur & Engineering"
+              >
+                <span class="brand-line-1">GARIS CERITA</span>
+                <span class="brand-line-2">STUDIO ARSITEKTUR</span>
+                <span class="brand-orange-stroke"></span>
+              </button>
+              <button
+                id="btn-sound-toggle"
+                type="button"
+                class="in-sketch-sound-btn"
+                title="Aktifkan/Matikan Efek Suara Telepon & Kertas"
+                aria-label="Toggle Efek Suara"
+              >
+                <span class="sound-icon">🔊</span>
+              </button>
+            </div>
+
+            <!-- ==============================================================
+                 MENU LINK 1: ABOUT STUDIO (Framed Photo on Left Wall)
+                 ============================================================== -->
+            <div class="sketch-menu-node node-about" data-menu-node="about">
+              <button
+                type="button"
+                class="sketch-link-callout"
+                data-menu-target="about"
+                style="left: 5.2%; top: 17.2%;"
+              >
+                <span class="sketch-link-title">ABOUT<br />STUDIO</span>
+              </button>
+
+              <p class="sketch-link-note" data-menu-target="about" style="left: 4.9%; top: 33.5%;">
+                Foto studio,<br />tim, nilai,<br />dan cerita<br />kami.
+              </p>
+
+              <!-- Curved Orange Arrow from ABOUT STUDIO to Framed Photo -->
+              <svg
+                class="sketch-arrow-svg"
+                viewBox="0 0 90 70"
+                style="left: 9.8%; top: 20.6%; width: 5.0%; height: 8.2%;"
+                aria-hidden="true"
+              >
+                <path
+                  d="M 8 10 Q 48 12 64 56"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M 53 50 L 65 58 L 69 44"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <!-- Orange Circular Person Icon Button on Frame -->
+              <button
+                type="button"
+                class="sketch-orange-pin"
+                data-menu-target="about"
+                aria-label="Buka About Studio"
+                style="left: 16.0%; top: 31.2%;"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M5 20c0-3.8 3.1-6.5 7-6.5s7 2.7 7 6.5" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- ==============================================================
+                 MENU LINK 2: PORTFOLIO (Drafting Board on Desk)
+                 ============================================================== -->
+            <div class="sketch-menu-node node-portfolio" data-menu-node="portfolio">
+              <div class="sketch-callout-group" style="left: 28.8%; top: 16.8%;">
+                <button type="button" class="sketch-link-callout" data-menu-target="portfolio">
+                  <span class="sketch-link-title">PORTFOLIO</span>
+                </button>
+                <p class="sketch-link-note-inline" data-menu-target="portfolio">
+                  Papan tulis proyek.<br />Klik untuk melihat<br />daftar portofolio desain.
+                </p>
+              </div>
+
+              <!-- Curved Orange Arrow from PORTFOLIO to Drafting Board -->
+              <svg
+                class="sketch-arrow-svg"
+                viewBox="0 0 80 110"
+                style="left: 25.5%; top: 20.2%; width: 4.4%; height: 11.2%;"
+                aria-hidden="true"
+              >
+                <path
+                  d="M 58 10 Q 22 30 20 96"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M 11 84 L 20 98 L 30 85"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <!-- Orange Circular Folder Icon Button on Drafting Board -->
+              <button
+                type="button"
+                class="sketch-orange-pin"
+                data-menu-target="portfolio"
+                aria-label="Buka Portfolio Desain"
+                style="left: 36.8%; top: 34.0%;"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- ==============================================================
+                 MENU LINK 3: RESEARCH & LAB (Computer Monitor on Desk)
+                 ============================================================== -->
+            <div class="sketch-menu-node node-lab" data-menu-node="lab">
+              <div class="sketch-callout-group" style="left: 50.8%; top: 16.5%;">
+                <button type="button" class="sketch-link-callout" data-menu-target="lab">
+                  <span class="sketch-link-title">RESEARCH &amp; LAB</span>
+                </button>
+                <p class="sketch-link-note-inline" data-menu-target="lab">
+                  Komputer studi &amp; riset.<br />Klik untuk membuka<br />daftar riset, lab studi,<br />feasibility study dashboard,<br />dan tautan GitHub.
+                </p>
+              </div>
+
+              <!-- Curved Orange Arrow from RESEARCH & LAB to Monitor -->
+              <svg
+                class="sketch-arrow-svg"
+                viewBox="0 0 70 140"
+                style="left: 47.6%; top: 20.2%; width: 4.2%; height: 16.8%;"
+                aria-hidden="true"
+              >
+                <path
+                  d="M 52 8 Q 16 42 22 126"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M 13 114 L 22 128 L 32 114"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <!-- Orange Circular Lab Flask Icon Button on Monitor -->
+              <button
+                type="button"
+                class="sketch-orange-pin"
+                data-menu-target="lab"
+                aria-label="Buka Research and Lab"
+                style="left: 58.6%; top: 40.5%;"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 3h6" />
+                  <path d="M10 3v5.2L5.4 16.6A2 2 0 0 0 7.1 20h9.8a2 2 0 0 0 1.7-3.4L14 8.2V3" />
+                  <path d="M7.5 14h9" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- ==============================================================
+                 MENU LINK 4: ARCHIVE / HISTORY (Wooden Bookshelf on Right)
+                 ============================================================== -->
+            <div class="sketch-menu-node node-archive" data-menu-node="archive">
+              <div class="sketch-callout-group" style="left: 85.8%; top: 18.8%;">
+                <button type="button" class="sketch-link-callout" data-menu-target="archive">
+                  <span class="sketch-link-title">ARCHIVE / HISTORY</span>
+                </button>
+                <p class="sketch-link-note-inline" data-menu-target="archive">
+                  Rak dokumen.<br />Klik untuk melihat<br />sejarah studio,<br />publikasi, arsip,<br />dan dokumen penting.
+                </p>
+              </div>
+
+              <!-- Curved Orange Arrow from ARCHIVE / HISTORY to Bookshelf -->
+              <svg
+                class="sketch-arrow-svg"
+                viewBox="0 0 90 80"
+                style="left: 81.8%; top: 21.2%; width: 4.5%; height: 7.6%;"
+                aria-hidden="true"
+              >
+                <path
+                  d="M 80 12 Q 42 18 16 62"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M 14 48 L 15 64 L 30 57"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <!-- Orange Circular Document Icon Button on Bookshelf -->
+              <button
+                type="button"
+                class="sketch-orange-pin"
+                data-menu-target="archive"
+                aria-label="Buka Archive and History"
+                style="left: 81.2%; top: 29.8%;"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                  <path d="M14 3v6h6" />
+                  <line x1="8" y1="13" x2="16" y2="13" />
+                  <line x1="8" y1="17" x2="14" y2="17" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- ==============================================================
+                 MENU LINK 5: CONTACT (Vintage Telephone on Left Desk)
+                 ============================================================== -->
+            <div class="sketch-menu-node node-contact" data-menu-node="contact">
+              <div class="sketch-callout-group" style="left: 4.9%; top: 44.8%;">
+                <button type="button" class="sketch-link-callout" data-menu-target="contact">
+                  <span class="sketch-link-title">CONTACT</span>
+                </button>
+                <p class="sketch-link-note-inline" data-menu-target="contact">
+                  Klik untuk<br />mendengar<br />suara telepon<br />dan melihat<br />informasi<br />kontak.
+                </p>
+              </div>
+
+              <!-- Curved Orange Arrow from CONTACT to Telephone -->
+              <svg
+                class="sketch-arrow-svg"
+                viewBox="0 0 90 60"
+                style="left: 10.6%; top: 45.4%; width: 5.0%; height: 5.6%;"
+                aria-hidden="true"
+              >
+                <path
+                  d="M 8 12 Q 48 10 72 44"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M 58 42 L 74 46 L 73 30"
+                  fill="none"
+                  stroke="#E07A2E"
+                  stroke-width="3.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <!-- Orange Circular Phone Icon Button on Telephone -->
+              <button
+                type="button"
+                class="sketch-orange-pin"
+                data-menu-target="contact"
+                aria-label="Bunyikan Telepon & Buka Contact"
+                style="left: 16.8%; top: 51.8%;"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. PORTRAIT MOBILE / TABLET SKETCH LINK CARDS (HIDDEN ON DESKTOP)
+            Matches the 5 Sketch Wireframe Cards at Bottom of Concept Image
+         ====================================================================== -->
+    <nav class="portrait-sketch-cards" aria-label="Menu Cepat Sketsa Studio (Mobile & Tablet)">
+      <button type="button" class="portrait-sketch-card" data-menu-target="about">
+        <span class="p-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M5 20c0-3.8 3.1-6.5 7-6.5s7 2.7 7 6.5" />
+          </svg>
+        </span>
+        <span class="p-card-body">
+          <strong>ABOUT STUDIO</strong>
+          <small>Profil, Visi Misi &amp; 17 Tim</small>
+        </span>
+      </button>
+
+      <button type="button" class="portrait-sketch-card" data-menu-target="portfolio">
+        <span class="p-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+          </svg>
+        </span>
+        <span class="p-card-body">
+          <strong>PORTFOLIO</strong>
+          <small>22 Proyek Desain &amp; Urban</small>
+        </span>
+      </button>
+
+      <button type="button" class="portrait-sketch-card" data-menu-target="lab">
+        <span class="p-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M9 3h6M10 3v5.2L5.4 16.6A2 2 0 0 0 7.1 20h9.8a2 2 0 0 0 1.7-3.4L14 8.2V3M7.5 14h9" />
+          </svg>
+        </span>
+        <span class="p-card-body">
+          <strong>RESEARCH &amp; LAB</strong>
+          <small>Feasibility, BIM &amp; GitHub</small>
+        </span>
+      </button>
+
+      <button type="button" class="portrait-sketch-card" data-menu-target="archive">
+        <span class="p-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+            <path d="M14 3v6h6M8 13h8M8 17h6" />
+          </svg>
+        </span>
+        <span class="p-card-body">
+          <strong>ARCHIVE / HISTORY</strong>
+          <small>Sejarah, Sayembara &amp; SBU</small>
+        </span>
+      </button>
+
+      <button type="button" class="portrait-sketch-card" data-menu-target="contact">
+        <span class="p-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+        </span>
+        <span class="p-card-body">
+          <strong>CONTACT</strong>
+          <small>Dering Telepon &amp; Lokasi</small>
+        </span>
+      </button>
+    </nav>
+  </main>
+
+  <!-- ========================================================================
+       4. OVERLAY MODAL CONTAINER (ABOUT, PORTFOLIO, LAB, ARCHIVE, CONTACT)
+       ======================================================================== -->
+  <div id="overlay-backdrop" class="overlay-backdrop" role="dialog" aria-modal="true">
+    <section id="sketch-window" class="sketch-window"></section>
+  </div>
+
+  <!-- Studio Data, Sound Engine & 2D Sketch Parallax Controller (100% Static — Works on GitHub Pages & Direct Double-Click) -->
+  <script defer src="js/studio-data.js"></script>
+  <script defer src="js/sound-engine.js"></script>
+  <script defer src="js/app.js"></script>
+</body>
+</html>
